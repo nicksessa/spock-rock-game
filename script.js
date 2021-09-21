@@ -26,6 +26,9 @@ const choices = {
   spock: { name: "Spock", defeats: ["scissors", "rock"] },
 };
 
+let playerScoreNumber = 0;
+let computerScoreNumber = 0;
+
 let computerChoice = "";
 
 // Reset all 'selected' icons
@@ -82,16 +85,39 @@ function displayComputerChoice() {
   }
 }
 
+// Check result, increase scores, update result text
+function updateScore(playerChoice) {
+  console.log("Player: " + playerChoice + " Computer: " + computerChoice);
+  if (playerChoice === computerChoice) {
+    resultText.textContent = "It's a tie.";
+  } else {
+    const choice = choices[playerChoice];
+    console.log(choice.defeats.indexOf(computerChoice));
+    // if index == 1 or 0, the player wins
+    // if index = -1 (not found, therefore the computer wins)
+    if (choice.defeats.indexOf(computerChoice) > -1) {
+      resultText.textContent = "You Won!";
+      playerScoreNumber++;
+      playerScoreEl.textContent = playerScoreNumber;
+    } else {
+      resultText.textContent = "You Lost!";
+      computerScoreNumber++;
+      computerScoreEl.textContent = computerScoreNumber;
+    }
+  }
+}
+
 // Call functions to process the turn
-function checkResult() {
+function checkResult(playerChoice) {
   resetSelected();
   computerRandomChoice();
   displayComputerChoice();
+  updateScore(playerChoice);
 }
 
 // Passing player selection value and style icons
 function select(playerChoice) {
-  checkResult();
+  checkResult(playerChoice);
   //console.log(playerChoice);
   switch (playerChoice) {
     case "rock":
