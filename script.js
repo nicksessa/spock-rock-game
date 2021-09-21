@@ -31,6 +31,18 @@ let computerScoreNumber = 0;
 
 let computerChoice = "";
 
+// reset score and playerchoice/computer choice
+function resetAll() {
+  playerScoreNumber = 0;
+  computerScoreNumber = 0;
+  playerScoreEl.textContent = playerScoreNumber;
+  computerScoreEl.textContent = computerScoreNumber;
+  playerChoiceEl.textContent = "";
+  computerChoiceEl.textContent = "";
+  resultText.textContent = "";
+  resetSelected();
+}
+
 // Reset all 'selected' icons
 
 function resetSelected() {
@@ -144,3 +156,6 @@ function select(playerChoice) {
       break;
   }
 }
+
+// on start set initial values
+resetAll();
